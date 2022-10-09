@@ -80,7 +80,7 @@ export default class NoteTimer extends Plugin {
 	async extractConfig(ctx:MarkdownPostProcessorContext) {
 		const actFile = this.app.vault.getFiles().find(file => file.path === ctx.sourcePath)
 		const curString = await this.app.vault.read(actFile);
-		const timerBlockStart = curString.indexOf("```timer")
+		const timerBlockStart = curString.indexOf("```meeting-timer")
 		const timerBlockEnd = curString.slice(timerBlockStart, curString.length).indexOf("```", 3) + 3 + timerBlockStart
 		const timerConfig = curString.substring(timerBlockStart, timerBlockEnd)
 		console.log(timerConfig)
@@ -93,7 +93,7 @@ export default class NoteTimer extends Plugin {
 
 	async onload() {
 
-		this.registerMarkdownCodeBlockProcessor("timer", (src,el,ctx) => {
+		this.registerMarkdownCodeBlockProcessor("meeting-timer", (src,el,ctx) => {
 			const timerConfig = this.extractConfig(ctx)			
 			const time:Time = {h:0,m:25,s:0}
 			const stringTime = () => {
@@ -101,9 +101,9 @@ export default class NoteTimer extends Plugin {
 			}
 
 			const timeDisplay = el.createEl("span", { text: stringTime()})			
-			const buttonDiv = el.createDiv({ cls: "timer-button-group"})
-			const start = buttonDiv.createEl("button", { text: "start", cls: "timer-start" })
-			const reset = buttonDiv.createEl("button" ,{ text: "reset", cls: "timer-reset"})
+			const buttonDiv = el.createDiv({ cls: "meeting-timer-button-group"})
+			const start = buttonDiv.createEl("button", { text: "start", cls: "meeting-timer-start" })
+			const reset = buttonDiv.createEl("button" ,{ text: "reset", cls: "meeting-timer-reset"})
 
 			const runTimerBackward = () => {
 				time.s--
