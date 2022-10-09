@@ -1,0 +1,9 @@
+{
+	"id": "obsidian-meeting-timer",
+	"name": "Meeting Timer",
+	"version": "0.0.1",
+	"minAppVersion": "0.15.9",
+	"description": "Use a countdown timer for your meetings to be aware of your time schedule",
+	"author": "Thomas Wölfle",
+	"isDesktopOnly": false
+}
